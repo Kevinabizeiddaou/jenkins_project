@@ -6,7 +6,7 @@ class TestApp(unittest.TestCase):
         # Must match the exact string in app.py (update your name in both places)
         self.assertEqual(
             greet("World"),
-            "Hello, World from YourFirstName YourLastName!"
+            "Hello, World from Kevin Abi Zeid Daou!"
         )
 
 if __name__ == "__main__":

@@ -1,7 +1,5 @@
 def greet(name: str) -> str:
-    # Replace with your real name so the unit test passes:
-    student = "YourFirstName YourLastName"
-    return f"Hello, {name} from {student}!"
+    return f"Hello, {name} from Kevin Abi Zeid Daou!"
 
 
 if __name__ == "__main__":
