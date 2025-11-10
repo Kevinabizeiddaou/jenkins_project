@@ -1,13 +1,9 @@
 pipeline {
   agent any
+
+  // keep only simple literals here
   environment {
     VENV_DIR = '.venv'
-    PY = isUnix() ? 'python3' : 'py -3'
-  }
-
-  options {
-    // leave empty (no ansiColor)
-    // you can also add: disableConcurrentBuilds()
   }
 
   stages {
@@ -18,6 +14,9 @@ pipeline {
     stage('Setup') {
       steps {
         script {
+          // Decide python command per OS here (allowed)
+          def PY = isUnix() ? 'python3' : 'py -3'
+
           if (isUnix()) {
             sh """
               ${PY} -m venv ${VENV_DIR}
@@ -38,8 +37,11 @@ pipeline {
     stage('Lint') {
       steps {
         script {
-          if (isUnix()) sh "${VENV_DIR}/bin/flake8 app.py"
-          else bat "call ${VENV_DIR}\\Scripts\\flake8 app.py"
+          if (isUnix()) {
+            sh "${VENV_DIR}/bin/flake8 app.py"
+          } else {
+            bat "call ${VENV_DIR}\\Scripts\\flake8 app.py"
+          }
         }
       }
     }
@@ -47,8 +49,11 @@ pipeline {
     stage('Test') {
       steps {
         script {
-          if (isUnix()) sh "${VENV_DIR}/bin/pytest -q"
-          else bat "call ${VENV_DIR}\\Scripts\\pytest -q"
+          if (isUnix()) {
+            sh "${VENV_DIR}/bin/pytest -q"
+          } else {
+            bat "call ${VENV_DIR}\\Scripts\\pytest -q"
+          }
         }
       }
     }
