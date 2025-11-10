@@ -1,0 +1,10 @@
+# Linting
+flake8
+
+# Testing
+pytest
+pytest-cov
+coverage
+
+# Security scan
+bandit
